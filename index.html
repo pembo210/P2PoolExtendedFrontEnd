@@ -1,36 +1,34 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
     <head>
         <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-        <title>P2Pool</title>
+        <title>pembo210 P2Pool</title>
         <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
         <script type="text/javascript" src="d3.v2.min.js"></script>
 	    <link href="css/bootstrap.css" rel="stylesheet">
 		<link href="css/jquery.jqplot.min.css" rel="stylesheet">
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 		<script src="js/bootstrap.min.js"></script>
+
 		<script language="javascript" type="text/javascript" src="js/jquery.jqplot.min.js"></script>
 		<script class="include" language="javascript" type="text/javascript" src="js/jqplot.pieRenderer.min.js"></script>
 	    <style>
-			body {
-				padding-top: 60px;
-			}
-			line {
-                stroke: black;
-                stroke-width: 1;
-                shape-rendering: crispEdges;
-            }
-            
-            .plotline {
-                stroke-width: 1.4;
-                fill: none;
-            }
-            
-            text {
-                font-family: Sans-serif;
-                font-size: 12px;
-            }
+				body{ background-image:url(img/spacebg.jpg); background-repeat:repeat;color:#156B29 !important; padding-top:60px}
+				.well{background-color:rgba(0,0,0,0.7);color:#156B29 !important,  }
+				p{ background-color:#000; font-weight:bold}
+				ShareChart{background-color:#000 !important;color:#156B29 !important}
+				.jqplot-target{background-color:#000 !important;color:#156B29 !important}
+				#main-local text{color:#156B29 !important}
+				.table table-striped{background-color:#000 !important;color:#156B29 !important}
+				.table-striped tbody > tr:nth-child(2n+1) > td, .table-striped tbody > tr:nth-child(2n+1) > th {background-color:#000 !important;color:#156B29 !important}
+				#main-local  {stroke:#156B29 !important}
+				text[fill="#0000FF"] {fill: #444 !important;}
+				line {stroke:#156B29 !important}
+				.label, .badge {background-color:#000 !important;color:#FFF !important;font-size: 15px}
+				line {stroke: #FFF;stroke-width: 1;shape-rendering: crispEdges;}
+				.plotline {stroke:#156B29 !important;stroke-width: 2;fill: none;}
+				text { font-family: Sans-serif;font-size: 15px;stroke: #40BF40; background-color:#000}
 	    </style>
 	    <link href="css/bootstrap-responsive.css" rel="stylesheet">
         <script type="text/javascript">
@@ -96,7 +94,6 @@
 			    fill('/web/heads', '#heads');
 			    fill('/web/verified_tails', '#verified_tails');
 			    fill('/web/tails', '#tails');
-			    fill('../web/my_share_hashes', '#my_share_hashes');
 			}
                         var plot1;
                         var plot2;
@@ -233,23 +230,141 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="brand" href="/">P2Pool pool (<span class="symbol upper"></span>)</a>
+          <a class="brand" href="/">pembo210 P2P (<span class="symbol upper"></span>) node</a>
           <div class="nav-collapse collapse">
             <ul class="nav">
 			  <li class="active"><a href="index.html">Stats</a></li>
 			  <li><a href="graphs.html">Graph</a></li>
-              <li><a href="https://github.com/hardcpp/P2PoolExtendedFrontEnd">Contact</a></li>
+              
             </ul>
           </div><!--/.nav-collapse -->
         </div>
       </div>
     </div>
+<div align="center" style="background-color:#000"><p>Typical cgminer config: "cgminer --scrypt -Q 0 -o pembo210doge.noip.me:9555 -u PayoutAddress -p xxx --restOfCgminerOptions"</p>
+<p> 1% pool fee - Donations welcome D9BQStir3pjuAA4oZSU3g5iGUH6cb1hLw6</p></div><div align="center" >
+<table width="100%">
+  <tr>
+  <td style="padding-left:40px">
+    <span id="results"></span>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $.ajax({
+               url: "https://dogeapi.com/wow/v2/?a=get_info",
+                dataType: "text",
+                success: function(data) {
+                    var json = $.parseJSON(data);
+                    //display a few items
+                   $('#results').html('<p align="center">Doge Network Difficulty: ' + number_format(json.data.info.difficulty,0, '', ',') 
+                   + '</p><p align="center">Network Hashrate: ' + number_format((json.data.info.network_hashrate/1000000),0, '.', ',') + ' Mhs' 
+				   + '</p><p align="center">Current Block: ' + number_format(json.data.info.current_block, 0, '.', ',')  
+				   + '</p><p align="center">Doge/USD: <br>$' + json.data.info.doge_usd 
+				   + '</p><p align="center">Doge/BTC: <br>' + json.data.info.doge_btc) + '</p>';
+                    }
+                });
+            });
 
+function number_format(number, decimals, dec_point, thousands_sep) {
+
+  number = (number + '')
+    .replace(/[^0-9+\-Ee.]/g, '');
+  var n = !isFinite(+number) ? 0 : +number,
+    prec = !isFinite(+decimals) ? 0 : Math.abs(decimals),
+    sep = (typeof thousands_sep === 'undefined') ? ',' : thousands_sep,
+    dec = (typeof dec_point === 'undefined') ? '.' : dec_point,
+    s = '',
+    toFixedFix = function(n, prec) {
+      var k = Math.pow(10, prec);
+      return '' + (Math.round(n * k) / k)
+        .toFixed(prec);
+    };
+  // Fix for IE parseFloat(0.55).toFixed(0) = 0;
+  s = (prec ? toFixedFix(n, prec) : '' + Math.round(n))
+    .split('.');
+  if (s[0].length > 3) {
+    s[0] = s[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, sep);
+  }
+  if ((s[1] || '')
+    .length < prec) {
+    s[1] = s[1] || '';
+    s[1] += new Array(prec - s[1].length + 1)
+      .join('0');
+  }
+  return s.join(dec);
+}		
+			
+    </script>
+  </td>
+    <td><img src="img/doge.png" /></td>
+    <td align="center">
+   <p> Multiply your hashrate by 0.00000116 to get your difficulty setting. <br />
+    Add your setting to the end of your payout address</p>
+<table width="450" cellpadding="0" cellspacing="0">
+      <tbody>
+        <tr>
+          <td colspan="5" valign="top">&nbsp;</td>
+          </tr>
+        <tr>
+          <td width="90" valign="top"><p><em>KHash/s </em></p></td>
+          <td width="130" valign="top"><p><em> Difficulty setting</em></p></td>
+          <td width="9" valign="top">&nbsp;</td>
+          <td width="75" valign="top"><p><em>Direct Diff</em></p></td>
+          <td width="92" valign="top"><p><em>Difficulty setting</em></p></td>
+        </tr>
+        <tr>
+          <td valign="top"><p>50 kh/s</p></td>
+          <td valign="top"><p>+0.00005821</p></td>
+          <td valign="top">&nbsp;</td>
+          <td valign="top"><p>64</p></td>
+          <td valign="top"><p>+0.000975</p></td>
+        </tr>
+        <tr>
+          <td valign="top"><p>100 kh/s</p></td>
+          <td valign="top"><p>+0.00011641</p></td>
+          <td valign="top">&nbsp;</td>
+          <td valign="top"><p>128</p></td>
+          <td valign="top"><p>+0.001950</p></td>
+        </tr>
+        <tr>
+          <td valign="top"><p>250 kh/s</p></td>
+          <td valign="top"><p>+0.00029103</p></td>
+          <td valign="top">&nbsp;</td>
+          <td valign="top"><p>256</p></td>
+          <td valign="top"><p>+0.003907</p></td>
+        </tr>
+        <tr>
+          <td valign="top"><p>500 kh/s</p></td>
+          <td valign="top"><p>+0.00058207</p></td>
+          <td valign="top">&nbsp;</td>
+          <td valign="top"><p>384</p></td>
+          <td valign="top"><p>+0.005860</p></td>
+        </tr>
+        <tr>
+          <td valign="top"><p>750 kh/s</p></td>
+          <td valign="top"><p>+0.00087310</p></td>
+          <td valign="top">&nbsp;</td>
+          <td valign="top"><p>512</p></td>
+          <td valign="top"><p>+0.007812</p></td>
+        </tr>
+        <tr>
+          <td valign="top"><p>1000 kh/s</p></td>
+          <td valign="top"><p>+0.00116414</p></td>
+          <td valign="top">&nbsp;</td>
+          <td valign="top"><p>1024</p></td>
+          <td valign="top"><p>+0.015364</p></td>
+        </tr>
+      </tbody>
+    </table></td>
+  </tr>
+</table>
+
+</div>
 	<ul class="nav nav-tabs" id="myTab">
 	  	<li class="active"><a href="#stats" data-toggle="tab"><i class="icon-user"></i>&nbsp;Pool stats</a></li>
 	  	<li><a href="#shares" data-toggle="tab"><i class="icon-refresh"></i>&nbsp;Share explorer</a></li>
 	  	<li><a href="#lastblocks" data-toggle="tab"><i class="icon-list-alt"></i>&nbsp;Last blocks</a></li>
-		<li><a href="#mainnodepayout" data-toggle="tab"><i class="icon-download-alt"></i>&nbsp;Payout</a></li>
+		<li><a href="#mainnodepayout" data-toggle="tab"><i class="icon-download-alt"></i>&nbsp; Such Payout</a></li>
 	</ul>
 	<div class="tab-content">
 	  	<div class="tab-pane active" id="stats">
@@ -270,8 +385,8 @@
 				</div>
 				<svg id="main-local"></svg></div>
 				<br/>
-				<div class="well" style="width:1300px">
-					<table class="table table-striped" style="width: 1300px">
+				<div class="well" style="width:1000px">
+					<table class="table table-striped" style="width: 1000px">
 						<tbody>
 							<tr>
 							  <td><h5>Local rate</h5></td>
@@ -312,12 +427,12 @@
 					</table>
 				</div>
 				<br/>
-				<div style="width: 1340px">
-					<div class="well" style="width:600px; float: left">
+				<div style="width: 800px">
+					<div class="well" style="width:600px; float: left; display:none">
 						<h4>Local Shares</h4>
-						<div id="ShareChart" width="450" height="450"></div>
+						<div id="ShareChart" width="450" height="450"></div> 
 					</div>
-					<div class="well" style="width:600px; float: right">
+					<div class="well" style="width:600px; float: right; display:none">
 						<h4>Global pool speed</h4>
 						<div id="SpeedChart" width="450" height="450"></div>
 					</div>
@@ -331,7 +446,6 @@
 			<p>Heads: <span id="heads"></span></p>
 			<p>Verified tails: <span id="verified_tails"></span></p>
 			<p>Tails: <span id="tails"></span></p>
-			<p>My Shares: <span id="my_share_hashes"></span></p>
 		</div>
 	  	<div class="tab-pane" id="lastblocks">
 			<table id="blocks" class="table table-striped table-hover">
@@ -346,9 +460,9 @@
 	</div>
 	<div style="border-bottom: 1px solid #ddd;"></div>
 	<center>
-        <tt>P2Pool version: <span id="version"></span></tt><br/>
+        <tt>P2Pool version: <span id="version"></span> <a href="https://github.com/Rav3nPL/p2pool-rav">GIT</a></tt><br/>
 		<tt>Interface by hardcpp <a href="https://github.com/hardcpp/P2PoolExtendedFrontEnd">https://github.com/hardcpp/P2PoolExtendedFrontEnd</a></tt><br/>
-		<tt>Donate if you love it (LTC LdKxw2JewLdo1atDsQ33LiCG9ZUDQ4XmPb) (BTC 1FBa12SPET7YRGHoTXyawp1EBJyFPzju31)</tt>
+        P2Pool by <a href="https://github.com/Rav3nPL/p2pool-rav">https://github.com/Rav3nPL/p2pool-rav</a><br />
 	</center>
 		<br/>
 		<script type="text/javascript">

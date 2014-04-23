@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+<head>
+</head>
+<body>
+    <span id="results"></span><br><span id="results2">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+    <script>
+
+        //When DOM loaded we attach click event to button
+        $(document).ready(function() {
+            $.ajax({
+               url: "https://dogeapi.com/wow/v2/?a=get_info",
+                //force to handle it as text
+                dataType: "text",
+                success: function(data) {
+                    //data downloaded so we call parseJSON function 
+                    //and pass downloaded data
+                    var json = $.parseJSON(data);
+                    //now json variable contains data in json format
+                    //let's display a few items
+                   $('#results').html('Doge Difficulty: ' + json.data.info.difficulty 
+				   + '<br />Network Hashrate: ' + json.data.info.network_hashrate 
+				   + '<br />Current Block: ' + json.data.info.current_block 
+				   + '<br />Doge/USD: ' + json.data.info.doge_usd 
+				   + '<br />Doge/BTC: ' + json.data.info.doge_btc);
+                    }
+					
+					
+                });
+            $.ajax({
+               url: "https://dogeapi.com/wow/v2/?a=get_info",
+                //force to handle it as text
+                dataType: "text",
+                success: function(data) {
+                    //data downloaded so we call parseJSON function 
+                    //and pass downloaded data
+                    var json = $.parseJSON(data);
+                    //now json variable contains data in json format
+                    //let's display a few items
+                   $('#results2').html('Doge Difficulty: ' + json.data.info.difficulty 
+				   + '<br />Network Hashrate: ' + json.data.info.network_hashrate 
+				   + '<br />Current Block: ' + json.data.info.current_block 
+				   + '<br />Doge/USD: ' + json.data.info.doge_usd 
+				   + '<br />Doge/BTC: ' + json.data.info.doge_btc);
+                    }
+					
+					
+                });				
+				
+            });
+      
+    </script>
+
+</body>
+</html>
