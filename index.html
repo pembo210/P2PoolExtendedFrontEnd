@@ -235,7 +235,7 @@
             <ul class="nav">
 			  <li class="active"><a href="index.html">Stats</a></li>
 			  <li><a href="graphs.html">Graph</a></li>
-              
+                       
             </ul>
           </div><!--/.nav-collapse -->
         </div>
@@ -246,7 +246,7 @@
 <table width="100%">
   <tr>
   <td style="padding-left:40px">
-    <span id="results"></span>
+    <span id="results"></span><span id="results2"></span>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script>
         $(document).ready(function() {
@@ -259,12 +259,20 @@
                    $('#results').html('<p align="center">Doge Network Difficulty: ' + number_format(json.data.info.difficulty,0, '', ',') 
                    + '</p><p align="center">Network Hashrate: ' + number_format((json.data.info.network_hashrate/1000000),0, '.', ',') + ' Mhs' 
 				   + '</p><p align="center">Current Block: ' + number_format(json.data.info.current_block, 0, '.', ',')  
-				   + '</p><p align="center">Doge/USD: <br>$' + json.data.info.doge_usd 
-				   + '</p><p align="center">Doge/BTC: <br>' + json.data.info.doge_btc) + '</p>';
+				   + '</p><p align="center">Doge/USD: <br>$' + json.data.info.doge_usd );
+                    }
+                });
+			$.ajax({
+               url: "http://www.cryptocoincharts.info/v2/api/tradingPair/doge_btc",
+                dataType: "text",
+                success: function(data) {
+                    var json = $.parseJSON(data);
+                    //display a few items
+                   $('#results2').html('<p align="center">Doge/BTC: <br>' + json.price + '</p>' 
+                   + '<p align="center">24h volume:<br> ' + json.volume_btc + ' BTC</p>' );
                     }
                 });
             });
-
 function number_format(number, decimals, dec_point, thousands_sep) {
 
   number = (number + '')
